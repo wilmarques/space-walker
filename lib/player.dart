@@ -2,6 +2,7 @@ import 'package:flutter/services.dart';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame/experimental.dart';
 
 import 'game.dart';
 
@@ -11,7 +12,11 @@ enum PlayerState {
 }
 
 class Player extends SpriteGroupComponent<PlayerState>
-    with HasGameRef<SpaceWalkerGame>, KeyboardHandler, CollisionCallbacks {
+    with
+        HasGameRef<SpaceWalkerGame>,
+        KeyboardHandler,
+        TapCallbacks,
+        CollisionCallbacks {
   Player()
       : super(
           anchor: Anchor.center,
@@ -51,14 +56,14 @@ class Player extends SpriteGroupComponent<PlayerState>
 
   void resetPosition() {
     position = Vector2(
-      0,
+      100,
       (gameRef.size.y - size.y) / 2,
     );
   }
 
   @override
   void update(double dt) {
-    _velocity.x = (_hAxisInput * 600) as double;
+    _velocity.x = (_hAxisInput * 200).toDouble();
 
     position += _velocity * dt;
     super.update(dt);
@@ -72,9 +77,21 @@ class Player extends SpriteGroupComponent<PlayerState>
 
     if (isSpace && isHold && isKeyDown) {
       move();
+    } else {
+      stop();
     }
 
     return true;
+  }
+
+  @override
+  void onTapDown(TapDownEvent event) {
+    move();
+  }
+
+  @override
+  void onTapUp(TapUpEvent event) {
+    stop();
   }
 
   Future<void> _loadCharacterSprites() async {

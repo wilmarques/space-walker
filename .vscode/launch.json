@@ -9,7 +9,7 @@
       "toolArgs": [
         "--web-hostname", "0.0.0.0",
         "--web-port", "8080",
-        "--web-browser-flag", "--auto-open-devtools-for-tabs",
+        // "--web-browser-flag", "--auto-open-devtools-for-tabs",
         "--web-browser-flag", "--start-maximized",
         // "--dds-port", "35000" // Not working currently - It's Flutter Web bug (issue #84179)
         // "--host-vmservice-port", "35000"
@@ -25,7 +25,7 @@
       "toolArgs": [
         "--web-hostname", "0.0.0.0",
         "--web-port", "8080",
-        "--web-browser-flag", "--auto-open-devtools-for-tabs",
+        // "--web-browser-flag", "--auto-open-devtools-for-tabs",
         "--web-browser-flag", "--start-maximized"
       ]
     },
@@ -37,7 +37,7 @@
       "toolArgs": [
         "--web-hostname", "0.0.0.0",
         "--web-port", "8080",
-        "--web-browser-flag", "--auto-open-devtools-for-tabs",
+        // "--web-browser-flag", "--auto-open-devtools-for-tabs",
         "--web-browser-flag", "--start-maximized"
       ]
     }

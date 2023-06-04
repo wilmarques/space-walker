@@ -1,11 +1,12 @@
+import 'package:flame/experimental.dart' show CameraComponent;
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 
 import 'player.dart';
 import 'world.dart';
 
-  class SpaceWalkerGame extends FlameGame
-    with HasKeyboardHandlerComponents, HasCollisionDetection {
+class SpaceWalkerGame extends FlameGame
+    with HasKeyboardHandlerComponents, HasCollisionDetection, HasTappables {
   SpaceWalkerGame({super.children});
 
   @override
@@ -13,6 +14,14 @@ import 'world.dart';
     await super.onLoad();
 
     await add(Player());
-    await add(World());
+
+    var world = World();
+    await add(world);
+
+    final camera = CameraComponent.withFixedResolution(
+      world: world,
+      width: 800,
+      height: 600,
+    );
   }
 }

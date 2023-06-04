@@ -28,8 +28,11 @@
   },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
+  "remoteEnv": {
+    "FLUTTER_VERSION": "3.10.3"
+  },
   // Use 'postCreateCommand' to run commands after the container is created.
-  // "postCreateCommand": "uname -a",
+  "onCreateCommand": ".devcontainer/onCreate.sh",
   // Configure tool-specific properties.
   "customizations": {
     // Configure properties specific to VS Code.

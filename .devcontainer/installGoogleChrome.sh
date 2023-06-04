@@ -1,7 +1,17 @@
 #!/bin/sh
 
-# Update apt packages
-sudo apt update
+# Go to $HOME
+cd $HOME
+
+# Disable sandbox to prevent Chrome from crashing
+echo 'export QTWEBENGINE_DISABLE_SANDBOX=1' >> $HOME/.bashrc
 
 # Install Google Chrome
-sudo apt install -y google-chrome-stable
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O chrome.deb
+# Install downloaded file
+sudo dpkg -i ./chrome.deb
+# Delete downloaded file
+rm -f chrome.deb
+
+# Return to previous directory
+cd -

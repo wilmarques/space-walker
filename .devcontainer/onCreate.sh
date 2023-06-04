@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Exit on error
+# Exit on any error
 set -e
 # Ensure apt is in non-interactive to avoid prompts
 export DEBIAN_FRONTEND=noninteractive
@@ -16,3 +16,6 @@ cd .devcontainer
 
 # Install Flutter SDK
 ./installFlutterSdk.sh
+
+# Return to previous dir
+cd -

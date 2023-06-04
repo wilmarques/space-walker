@@ -19,17 +19,15 @@
       "gradleVersion": "latest",
       "mavenVersion": "latest",
       "antVersion": "latest"
-    },
-    "ghcr.io/jarrodcolburn/features/android-sdk:0": {
-      "emulator": true,
-      "platforms": "30",
-      "build-tools": "30.0.3"
     }
   },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
   "remoteEnv": {
-    "FLUTTER_VERSION": "3.10.3"
+    "FLUTTER_VERSION": "3.10.3",
+    "ANDROID_HOME": "$HOME/.androidsdk",
+    "ANDROID_PLATFORM_VERSION": "30",
+    "ANDROID_BUILD_TOOLS_VERSION": "30.0.3"
   },
   // Use 'postCreateCommand' to run commands after the container is created.
   "onCreateCommand": ".devcontainer/onCreate.sh",

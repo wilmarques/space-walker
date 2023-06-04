@@ -9,5 +9,5 @@ cd .devcontainer
 # Install Google Chrome
 ./installGoogleChrome.sh
 
-# Install Flutter
-./installFlutter.sh
+# Install Flutter SDK
+./installFlutterSdk.sh

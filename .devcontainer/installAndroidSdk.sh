@@ -7,15 +7,15 @@
 cd $HOME
 
 # Set ANDROID_HOME variable to $HOME/.androidsdk
-export ANDROID_HOME=$HOME/.androidsdk
+# export ANDROID_HOME=$HOME/.androidsdk
 # Create Android Home dir on $HOME
 mkdir -pv $ANDROID_HOME
 # Include a comment in bashrc to explain Android SDK
-echo '# Android SDK' >> $HOME/.bashrc
+# echo '# Android SDK' >> $HOME/.bashrc
 # Include Android Home variable on .bashrc
-echo 'export ANDROID_HOME="$HOME/.androidsdk"' >> $HOME/.bashrc
+# echo 'export ANDROID_HOME="$HOME/.androidsdk"' >> $HOME/.bashrc
 # Include Android SDK tools to PATH on .bashrc
-echo 'export PATH="$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH"' >> $HOME/.bashrc
+# echo 'export PATH="$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH"' >> $HOME/.bashrc
 
 # Download Android SDK Manager CLI
 wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O sdkmanager.zip
@@ -28,9 +28,9 @@ mkdir -pv $ANDROID_HOME/cmdline-tools/latest
 mv $ANDROID_HOME/cmdline-tools/{bin,lib} $ANDROID_HOME/cmdline-tools/latest
 
 # Enable Android Platform Tools and Build Tools
-yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platform-tools" "build-tools;$ANDROID_BUILD_TOOLS_VERSION" "platforms;android-$ANDROID_PLATFORM_VERSION"
+yes | sdkmanager "platform-tools" "build-tools;$ANDROID_BUILD_TOOLS_VERSION" "platforms;android-$ANDROID_PLATFORM_VERSION"
 # Accept Android licenses (required for sdkmanager)
-yes | $ANDROID_HOME/cmdline-tools/latest//bin/sdkmanager --licenses
+yes | sdkmanager --licenses
 
 # Return to previous dir
 cd -

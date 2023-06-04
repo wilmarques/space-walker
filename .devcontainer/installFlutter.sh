@@ -12,7 +12,7 @@ sudo apt update
 # Install Flutter dependencies not available in the base image (Ubuntu)
 sudo apt install -y xz-utils libglu1-mesa
 # Install Flutter for Linux desktop dependencies not available in the base image (Ubuntu)
-sudo apt install -y ninja-build libgtk-3-dev
+sudo apt install -y cmake clang ninja-build libgtk-3-dev
 
 #### Install Flutter
 # Download Flutter for Linux

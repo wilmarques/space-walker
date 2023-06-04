@@ -8,10 +8,8 @@ cd $HOME
 
 # Create Android Home dir on $HOME
 # mkdir -p $HOME/.androidsdk
-# Set Android Home dir to .androidsdk on $HOME
-# export ANDROID_HOME=$HOME/.androidsdk
 # Include Android tools to PATH on .bashrc
-echo 'export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools"' >> ~/.bashrc
+echo 'export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools"' >> $HOME/.bashrc
 # Refresh .bashrc
 source $HOME/.bashrc
 

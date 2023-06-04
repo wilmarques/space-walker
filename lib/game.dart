@@ -1,22 +1,18 @@
-import 'package:flame/events.dart';
 import 'package:flame/game.dart';
+import 'package:flame/input.dart';
 
 import 'player.dart';
 import 'world.dart';
 
-class SpaceWalkerGame extends FlameGame with PanDetector {
-  late Player player;
+  class SpaceWalkerGame extends FlameGame
+    with HasKeyboardHandlerComponents, HasCollisionDetection {
+  SpaceWalkerGame({super.children});
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
 
-    await add(Player(priority: 1));
+    await add(Player());
     await add(World());
-  }
-
-  @override
-  void onPanUpdate(DragUpdateInfo info) {
-    player.move(info.delta.game);
   }
 }

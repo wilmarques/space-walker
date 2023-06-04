@@ -2,7 +2,7 @@ import 'package:flutter/services.dart';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame/experimental.dart';
+import 'package:flame/events.dart';
 
 import 'game.dart';
 
@@ -74,8 +74,9 @@ class Player extends SpriteGroupComponent<PlayerState>
     final isKeyDown = event is RawKeyDownEvent;
     final isHold = event.repeat;
     final isSpace = keysPressed.contains(LogicalKeyboardKey.space);
+    final isWKey = keysPressed.contains(LogicalKeyboardKey.keyW);
 
-    if (isSpace && isHold && isKeyDown) {
+    if ((isSpace || isWKey) && isHold && isKeyDown) {
       move();
     } else {
       stop();

@@ -4,5 +4,9 @@ import 'package:flame/game.dart';
 import 'game.dart';
 
 void main() {
-  runApp(GameWidget(game: SpaceWalkerGame()));
+  runApp(
+    const GameWidget<SpaceWalkerGame>.controlled(
+      gameFactory: SpaceWalkerGame.new,
+    ),
+  );
 }

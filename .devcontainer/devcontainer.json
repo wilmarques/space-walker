@@ -27,9 +27,9 @@
     "FLUTTER_VERSION": "3.10.3",
     "ANDROID_PLATFORM_VERSION": "30",
     "ANDROID_BUILD_TOOLS_VERSION": "30.0.3",
-    "ANDROID_HOME": "${containerEnv:HOME}/.androidsdk",
-    "FLUTTER_HOME": "${containerEnv:HOME}/.flutter",
-    "PUB_CACHE": "${containerEnv:HOME}/.pub_cache"
+    "ANDROID_HOME": "${localEnv:HOME}/.androidsdk",
+    "FLUTTER_HOME": "${localEnv:HOME}/.flutter",
+    "PUB_CACHE": "${localEnv:HOME}/.pub_cache"
   },
   "remoteEnv": {
     "PATH": "${containerEnv:ANDROID_HOME}/emulator:${containerEnv:ANDROID_HOME}/tools:${containerEnv:ANDROID_HOME}/cmdline-tools/latest/bin:${containerEnv:ANDROID_HOME}/platform-tools:${containerEnv:FLUTTER_HOME}/bin:${containerEnv:PATH}"

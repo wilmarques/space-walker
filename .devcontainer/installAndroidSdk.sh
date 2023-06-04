@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Install Android SDK and its dependencies
 # Relying on Java pre-installed in the container config

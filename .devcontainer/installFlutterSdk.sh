@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Install Flutter and its dependencies
 # Ready for Android, Web and Linux desktop

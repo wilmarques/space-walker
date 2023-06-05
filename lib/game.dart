@@ -2,6 +2,7 @@ import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 
+import 'move_button.dart';
 import 'player.dart';
 import 'background.dart';
 
@@ -9,21 +10,31 @@ class SpaceWalkerGame extends FlameGame
     with HasKeyboardHandlerComponents, HasCollisionDetection {
   SpaceWalkerGame({super.children});
 
-  final world = World();
+  late Player _player;
+  late final CameraComponent _camera;
+
+  final _world = World();
+  final _background = Background();
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
 
-    final camera = CameraComponent.withFixedResolution(
-      world: world,
+    _camera = CameraComponent.withFixedResolution(
+      world: _world,
       width: 1600,
       height: 800,
     );
-    camera.viewfinder.anchor = Anchor.topLeft;
-    await addAll([camera, world]);
+    _camera.viewfinder.anchor = Anchor.topLeft;
+    await addAll([_camera, _world]);
 
-    await world.add(Player());
-    await world.add(Background());
+    _player = Player();
+    await _world.add(_player);
+
+    await _world.add(MoveButton());
+    await _world.add(_background);
   }
+
+  void movePlayer() => _player.move();
+  void stopPlayer() => _player.stop();
 }

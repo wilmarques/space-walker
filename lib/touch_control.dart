@@ -3,7 +3,7 @@ import 'package:flame/events.dart';
 
 import 'game.dart';
 
-class MoveButton extends CircleComponent
+class TouchControl extends CircleComponent
     with HasGameRef<SpaceWalkerGame>, TapCallbacks {
 
   // Enable touch control from any point of the screen
@@ -12,11 +12,11 @@ class MoveButton extends CircleComponent
 
   @override
   void onTapDown(TapDownEvent event) {
-    game.movePlayer();
+    gameRef.movePlayer();
   }
 
   @override
   void onTapUp(TapUpEvent event) {
-    game.stopPlayer();
+    gameRef.stopPlayer();
   }
 }

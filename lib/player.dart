@@ -2,7 +2,6 @@ import 'package:flutter/services.dart';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame/events.dart';
 
 import 'game.dart';
 
@@ -12,11 +11,7 @@ enum PlayerState {
 }
 
 class Player extends SpriteGroupComponent<PlayerState>
-    with
-        HasGameRef<SpaceWalkerGame>,
-        KeyboardHandler,
-        TapCallbacks,
-        CollisionCallbacks {
+    with HasGameRef<SpaceWalkerGame>, KeyboardHandler, CollisionCallbacks {
   Player()
       : super(
           anchor: Anchor.center,
@@ -35,6 +30,31 @@ class Player extends SpriteGroupComponent<PlayerState>
 
     resetPosition();
     current = PlayerState.idle;
+  }
+
+  @override
+  void update(double dt) {
+    double moveSpeed = 200;
+    _velocity.x = _hAxisInput * moveSpeed;
+
+    position += _velocity * dt;
+    super.update(dt);
+  }
+
+  @override
+  bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
+    final isKeyDown = event is RawKeyDownEvent;
+    final isHold = event.repeat;
+    final isSpace = keysPressed.contains(LogicalKeyboardKey.space);
+    final isWKey = keysPressed.contains(LogicalKeyboardKey.keyW);
+
+    if ((isSpace || isWKey) && isHold && isKeyDown) {
+      game.movePlayer();
+    } else {
+      game.stopPlayer();
+    }
+
+    return true;
   }
 
   void move() {
@@ -57,42 +77,8 @@ class Player extends SpriteGroupComponent<PlayerState>
   void resetPosition() {
     position = Vector2(
       100,
-      (gameRef.size.y - size.y) / 2,
+      (800 / 2) - size.y,
     );
-  }
-
-  @override
-  void update(double dt) {
-    _velocity.x = (_hAxisInput * 200).toDouble();
-
-    position += _velocity * dt;
-    super.update(dt);
-  }
-
-  @override
-  bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
-    final isKeyDown = event is RawKeyDownEvent;
-    final isHold = event.repeat;
-    final isSpace = keysPressed.contains(LogicalKeyboardKey.space);
-    final isWKey = keysPressed.contains(LogicalKeyboardKey.keyW);
-
-    if ((isSpace || isWKey) && isHold && isKeyDown) {
-      move();
-    } else {
-      stop();
-    }
-
-    return true;
-  }
-
-  @override
-  void onTapDown(TapDownEvent event) {
-    move();
-  }
-
-  @override
-  void onTapUp(TapUpEvent event) {
-    stop();
   }
 
   Future<void> _loadCharacterSprites() async {

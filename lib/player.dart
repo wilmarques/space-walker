@@ -19,7 +19,7 @@ class Player extends SpriteGroupComponent<PlayerState>
         );
 
   var _hAxisInput = 0;
-  var _velocity = Vector2.zero();
+  final _velocity = Vector2.zero();
 
   @override
   Future<void> onLoad() async {
@@ -28,7 +28,7 @@ class Player extends SpriteGroupComponent<PlayerState>
     await add(CircleHitbox());
     await _loadCharacterSprites();
 
-    resetPosition();
+    _resetPosition();
     current = PlayerState.idle;
   }
 
@@ -69,25 +69,28 @@ class Player extends SpriteGroupComponent<PlayerState>
   }
 
   void reset() {
-    _velocity = Vector2.zero();
     current = PlayerState.idle;
-    resetPosition();
+    _resetVelocity();
+    _resetPosition();
   }
 
-  void resetPosition() {
+  void _resetVelocity() {
+    var Vector2(:x) = Vector2.zero();
+    _velocity.x = x;
+  }
+
+  void _resetPosition() {
+    const gameHeigth = 800;
     position = Vector2(
       100,
-      (800 / 2) - size.y,
+      (gameHeigth / 2) - size.y,
     );
   }
 
   Future<void> _loadCharacterSprites() async {
-    final idle = await gameRef.loadSprite('spaceship/idle.png');
-    final moving = await gameRef.loadSprite('spaceship/moving.gif');
-
     sprites = <PlayerState, Sprite>{
-      PlayerState.idle: idle,
-      PlayerState.moving: moving,
+      PlayerState.idle: await gameRef.loadSprite('spaceship/idle.png'),
+      PlayerState.moving: await gameRef.loadSprite('spaceship/moving.gif'),
     };
   }
 }

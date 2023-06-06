@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +21,8 @@ class Portal extends CircleComponent with HasGameRef<SpaceWalkerGame> {
   @override
   Future<void> onLoad() async {
     await super.onLoad();
+
+    await add(CircleHitbox(radius: 10, collisionType: CollisionType.passive));
 
     position = Vector2(
       gameRef.gameWidth - 100,

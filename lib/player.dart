@@ -4,6 +4,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
 import 'game.dart';
+import 'portal.dart';
 
 enum PlayerState {
   idle,
@@ -15,7 +16,7 @@ class Player extends SpriteGroupComponent<PlayerState>
   Player()
       : super(
           anchor: Anchor.center,
-          priority: 1,
+          priority: 2,
         );
 
   var _hAxisInput = 0;
@@ -25,7 +26,7 @@ class Player extends SpriteGroupComponent<PlayerState>
   Future<void> onLoad() async {
     await super.onLoad();
 
-    await add(CircleHitbox());
+    await add(RectangleHitbox(size: Vector2(90, 90)));
     await _loadCharacterSprites();
 
     _resetPosition();
@@ -57,6 +58,14 @@ class Player extends SpriteGroupComponent<PlayerState>
     return true;
   }
 
+  @override
+  void onCollisionStart(intersectionPoints, PositionComponent other) {
+    super.onCollisionStart(intersectionPoints, other);
+    if (other is Portal) {
+      _resetPosition();
+    }
+  }
+
   void move() {
     _hAxisInput = 0;
     current = PlayerState.moving;
@@ -64,14 +73,14 @@ class Player extends SpriteGroupComponent<PlayerState>
   }
 
   void stop() {
-    current = PlayerState.idle;
     _hAxisInput = 0;
+    current = PlayerState.idle;
   }
 
   void reset() {
-    current = PlayerState.idle;
     _resetVelocity();
     _resetPosition();
+    current = PlayerState.idle;
   }
 
   void _resetVelocity() {
@@ -82,7 +91,7 @@ class Player extends SpriteGroupComponent<PlayerState>
   void _resetPosition() {
     position = Vector2(
       100,
-      (gameRef.gameHeight / 2) - size.y,
+      gameRef.gameHeight / 2,
     );
   }
 

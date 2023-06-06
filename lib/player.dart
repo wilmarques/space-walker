@@ -49,9 +49,9 @@ class Player extends SpriteGroupComponent<PlayerState>
     final isWKey = keysPressed.contains(LogicalKeyboardKey.keyW);
 
     if ((isSpace || isWKey) && isHold && isKeyDown) {
-      game.movePlayer();
+      gameRef.movePlayer();
     } else {
-      game.stopPlayer();
+      gameRef.stopPlayer();
     }
 
     return true;
@@ -80,10 +80,9 @@ class Player extends SpriteGroupComponent<PlayerState>
   }
 
   void _resetPosition() {
-    const gameHeigth = 800;
     position = Vector2(
       100,
-      (gameHeigth / 2) - size.y,
+      (gameRef.gameHeight / 2) - size.y,
     );
   }
 

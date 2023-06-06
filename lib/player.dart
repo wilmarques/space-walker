@@ -59,10 +59,11 @@ class Player extends SpriteGroupComponent<PlayerState>
   }
 
   @override
-  void onCollisionStart(intersectionPoints, PositionComponent other) {
+  Future<void> onCollisionStart(intersectionPoints, PositionComponent other) async {
     super.onCollisionStart(intersectionPoints, other);
     if (other is Portal) {
-      _resetPosition();
+      _reset();
+      gameRef.loadNewWorld();
     }
   }
 
@@ -77,7 +78,7 @@ class Player extends SpriteGroupComponent<PlayerState>
     current = PlayerState.idle;
   }
 
-  void reset() {
+  void _reset() {
     _resetVelocity();
     _resetPosition();
     current = PlayerState.idle;

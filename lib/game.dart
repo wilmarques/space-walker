@@ -43,4 +43,6 @@ class SpaceWalkerGame extends FlameGame
 
   void movePlayer() => _player.move();
   void stopPlayer() => _player.stop();
+
+  Future<void> loadNewWorld() async => _background.changeWorld();
 }
